@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aegis - Local AI Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="container" id="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">⬢</div>
+                <h1 class="logo-text">Aegis</h1>
+            </div>
+            <nav class="nav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#download" class="nav-link">Download</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                </ul>
+            </nav>
+            <button id="theme-toggle" class="btn btn-theme-toggle" aria-label="Switch to dark mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Private AI That Lives on Your Device</h2>
+                    <p>Experience the power of local artificial intelligence with Aegis - where your data stays private, your responses are instant, and you're always in control.</p>
+                    <div class="hero-buttons">
+                        <a href="#download" class="btn btn-primary">Download for Android</a>
+                        <a href="#features" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-illustration">
+                    <div id="ghost-fibers-container" class="ghost-fibers-wrapper"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h3>Why Choose Aegis?</h3>
+                    <p>Designed for privacy, performance, and peace of mind</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Complete Privacy</h3>
+                        <p>All processing happens locally on your device. Your conversations, data, and information never leave your phone.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Lightning Fast</h3>
+                        <p>Optimized for mobile with efficient inference that delivers responses in milliseconds, not seconds.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Beautiful Design</h3>
+                        <p>Inspired by Apple's design principles with thoughtful interactions, subtle animations, and refined typography.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Android Optimized</h3>
+                        <p>Specifically engineered for Android devices, from budget phones to flagship models.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section class="download">
+            <div class="container">
+                <div class="download-content">
+                    <div class="download-info">
+                        <h3>Get the Latest Version</h3>
+                        <p>Download the most recent release of Aegis with all features, security updates, and performance improvements.</p>
+                        <div class="version-badge">v1.2.0 • Updated Oct 9, 2026</div>
+                        <a href="https://github.com/loquest/aegis-android/releases/latest/download/Aegis.apk"
+                           class="btn btn-download"
+                           download>
+                            <span>📥</span>
+                            Download Aegis.apk
+                        </a>
+                        <p class="download-note">Requires Android 8.0 or higher. Installation from unknown sources may need to be enabled in settings.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>About Aegis</h3>
+                        <p>Aegis was created for those who believe AI should be private, accessible, and under user control. We've built a local-first AI assistant that runs powerful language models directly on your Android device without compromising on performance or privacy.</p>
+                        <p>Our commitment to you:</p>
+                        <ul>
+                            <li>✅ Zero data collection - everything stays on your device</li>
+                            <li>✅ Transparent open source core - code you can verify</li>
+                            <li>✅ Regular updates with the latest model optimizations</li>
+                            <li>✅ Community-driven development and support</li>
+                        </ul>
+                        <p>Join thousands of users who have already made Aegis their trusted local AI companion for work, learning, and everyday life.</p>
+                    </div>
+                    <div class="about-illustration">
+                        <!-- Device illustration would go here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-icon">⬢</div>
+                    <div class="logo-text">Aegis</div>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">GitHub</a>
+                </div>
+                <p class="footer-copyright">© 2026 Aegis. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Load dependencies -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/ogl@1.x/dist/ogl.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- GhostFibers Component -->
+    <script type="text/babel" data-type="module" data-presets="env,react">
+        // GhostFibers Component - Adapted from React Bits
+        const { useEffect, useRef } = React;
+        const { Mesh, Program, Renderer, Triangle } = OGL;
+
+        const hexToRgb = hex => {
+          const value = hex.trim().replace(/^#/, '');
+          const normalized = value.length === 3 ? value.replace(/./g, channel => channel + channel) : value;
+          const match = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(normalized);
+          if (!match) return [1, 1, 1];
+          return [parseInt(match[1], 16) / 255, parseInt(match[2], 16) / 255, parseInt(match[3], 16) / 255];
+        };
+
+        const setColor = (uniform, hex) => {
+          const color = hexToRgb(hex);
+          uniform.value[0] = color[0];
+          uniform.value[1] = color[1];
+          uniform.value[2] = color[2];
+        };
+
+        const vertex = `#version 300 es
+        in vec2 position;
+
+        void main() {
+          gl_Position = vec4(position, 0.0, 1.0);
+        }
+        `;
+
+        const fragment = `#version 300 es
+        precision highp float;
+
+        uniform vec2 uResolution;
+        uniform float uTime;
+        uniform float uSpeed;
+        uniform float uScale;
+        uniform float uRotation;
+        uniform float uLayers;
+        uniform float uWaveAmplitude;
+        uniform float uWaveFrequency;
+        uniform float uWaveSpeed;
+        uniform float uLayerSpeed;
+        uniform float uTwist;
+        uniform float uTwistFrequency;
+        uniform float uTwistSpeed;
+        uniform float uLineFrequency;
+        uniform float uLineSpacing;
+        uniform float uLineSharpness;
+        uniform float uGlowFalloff;
+        uniform float uGlowIntensity;
+        uniform float uBrightness;
+        uniform float uBlueBoost;
+        uniform float uVignette;
+        uniform float uGrain;
+        uniform float uRotationSpeed;
+        uniform float uLightMode;
+        uniform vec3 uLineColor;
+        uniform vec3 uGlowColor;
+
+        out vec4 fragColor;
+
+        #define MAX_LAYERS 10
+
+        mat2 rotate2d(float angle) {
+          float sine = sin(angle);
+          float cosine = cos(angle);
+          return mat2(cosine, -sine, sine, cosine);
+        }
+
+        float grainHash(vec2 point) {
+          point = floor(point);
+          float hash = 52.9829189 * fract(dot(point, vec2(0.065, 0.005)));
+          return fract(hash);
+        }
+
+        float layeredGrain(vec2 fragmentPixel) {
+          vec2 point = mod(fragmentPixel + vec2(uTime * 30.0, -uTime * 21.0), 1024.0);
+          vec2 rotated = mat2(0.8, -0.5, 0.5, 0.8) * point;
+          float grain = 0.0;
+          grain += 0.40 * grainHash(rotated);
+          grain += 0.25 * grainHash(rotated * 2.0 + 17.0);
+          grain += 0.20 * grainHash(rotated * 4.0 + 47.0);
+          grain += 0.10 * grainHash(rotated * 8.0 + 113.0);
+          grain += 0.05 * grainHash(rotated * 16.0 + 191.0);
+          return grain;
+        }
+
+        void main() {
+          vec2 resolution = max(uResolution, vec2(1.0));
+          vec2 uv = (2.0 * gl_FragCoord.xy - resolution) / resolution.y;
+          float time = uTime * uSpeed;
+          vec3 backdrop = mix(vec3(0.070588, 0.058824, 0.090196), vec3(1.0), step(0.5, uLightMode));
+          vec3 centerTone = max(uLineColor * 0.85567 - uGlowColor * 0.06186, vec3(0.0));
+          vec3 cloudTone = uLineColor * 0.19588 + uGlowColor * 0.2268;
+          vec2 p = uv;
+          p /= max(uScale, 0.05);
+          p = rotate2d(radians(uRotation) + time * uRotationSpeed) * p;
+          vec3 color = vec3(0.0);
+          float fiberField = 0.0;
+
+          for (int index = 0; index < MAX_LAYERS; index++) {
+            float fi = float(index) + 1.0;
+            if (fi > uLayers) break;
+
+            p += uWaveAmplitude * sin(p.yx * fi * uWaveFrequency + time * (uWaveSpeed + fi * uLayerSpeed));
+
+            float radius = length(p);
+            float polarAngle = atan(p.y, p.x);
+            polarAngle += sin(radius * uTwistFrequency - time * uTwistSpeed + fi) * uTwist;
+            p = vec2(cos(polarAngle), sin(polarAngle)) * radius;
+
+            float lines = abs(sin(p.x * (uLineFrequency + fi * uLineSpacing) + sin(p.y * 3.0 + time)));
+            lines = pow(max(0.0, 1.0 - lines), uLineSharpness);
+            fiberField += lines / fi;
+            color += uLineColor * lines / fi;
+
+            float glow = exp(-uGlowFalloff * abs(sin(p.x * 3.0 + time + fi)));
+            color += uGlowColor * glow * uGlowIntensity / (fi * 2.0);
+          }
+
+          float center = exp(-2.2 * dot(uv, uv));
+          color += centerTone * center;
+
+          float cloud = exp(-1.5 * length(uv + vec2(sin(time * 0.3) * 0.25, cos(time * 0.25) * 0.18)));
+          color += cloudTone * cloud;
+
+          float vignette = 1.0 - smoothstep(0.35, 1.45, length(uv));
+          color *= mix(1.0 - uVignette, 1.0, vignette);
+          color = 1.0 - exp(-color * uBrightness);
+          color.b *= uBlueBoost;
+
+          vec3 outputColor;
+          if (uLightMode > 0.5) {
+            float edgeFade = mix(1.0 - uVignette, 1.0, vignette);
+            float fibers = pow(smoothstep(0.12, 1.05, fiberField) * edgeFade, 1.5);
+            float atmosphere = (center * 0.025 + cloud * 0.015) * edgeFade;
+            vec3 fiberInk = mix(backdrop, uLineColor, 0.52);
+            vec3 airColor = mix(backdrop, uGlowColor, 0.16);
+
+            outputColor = mix(backdrop, airColor, atmosphere);
+            outputColor = mix(outputColor, fiberInk, fibers * 0.3);
+          } else {
+            outputColor = backdrop + color;
+          }
+
+          float noise = (layeredGrain(gl_FragCoord.xy) - 0.5) * uGrain;
+          outputColor = clamp(outputColor + noise, 0.0, 1.0);
+          fragColor = vec4(outputColor, 1.0);
+        }
+        `;
+
+        const contexts = new WeakMap();
+
+        const GhostFibers = ({
+          lineColor = '#140E35',
+          glowColor = '#3437A0',
+          speed = 0.2,
+          scale = 2,
+          rotation = 0,
+          rotationSpeed = 0.25,
+          layers = 4,
+          waveAmplitude = 0.015,
+          waveFrequency = 3,
+          waveSpeed = 0.15,
+          layerSpeed = 0.08,
+          twist = 0.1,
+          twistFrequency = 5,
+          twistSpeed = 1.2,
+          lineFrequency = 5,
+          lineSpacing = 2,
+          lineSharpness = 16,
+          glowFalloff = 10,
+          glowIntensity = 1.6,
+          brightness = 2,
+          blueBoost = 1.25,
+          vignette = 0.8,
+          grain = 0.05,
+          lightMode = false,
+          dpr = 1,
+          fps = 60,
+          paused = false,
+          className = ''
+        }) => {
+          const containerRef = useRef(null);
+
+          useEffect(() => {
+            const container = containerRef.current;
+            if (!container) return;
+
+            const renderer = new Renderer({
+              webgl: 2,
+              alpha: false,
+              antialias: false,
+              dpr: Math.min(Math.max(dpr, 0.5), 2)
+            });
+            const gl = renderer.gl;
+            const canvas = gl.canvas;
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.display = 'block';
+            canvas.setAttribute('aria-hidden', 'true');
+            container.appendChild(canvas);
+
+            const geometry = new Triangle(gl);
+            const program = new Program(gl, {
+              vertex,
+              fragment,
+              uniforms: {
+                uResolution: { value: new Float32Array([1, 1]) },
+                uTime: { value: 0 },
+                uSpeed: { value: 0.2 },
+                uScale: { value: 2 },
+                uRotation: { value: 0 },
+                uRotationSpeed: { value: 0.25 },
+                uLayers: { value: 4 },
+                uWaveAmplitude: { value: 0.015 },
+                uWaveFrequency: { value: 3 },
+                uWaveSpeed: { value: 0.15 },
+                uLayerSpeed: { value: 0.08 },
+                uTwist: { value: 0.1 },
+                uTwistFrequency: { value: 5 },
+                uTwistSpeed: { value: 1.2 },
+                uLineFrequency: { value: 5 },
+                uLineSpacing: { value: 2 },
+                uLineSharpness: { value: 16 },
+                uGlowFalloff: { value: 10 },
+                uGlowIntensity: { value: 1.6 },
+                uBrightness: { value: 2 },
+                uBlueBoost: { value: 1.25 },
+                uVignette: { value: 0.8 },
+                uGrain: { value: 0.05 },
+                uLightMode: { value: 0 },
+                uLineColor: { value: new Float32Array(hexToRgb('#140E35')) },
+                uGlowColor: { value: new Float32Array(hexToRgb('#3437A0')) }
+              }
+            });
+            const mesh = new Mesh(gl, { geometry, program });
+
+            let frameId = 0;
+            let elapsed = 0;
+            let previousTime = performance.now();
+            let lastRenderTime = 0;
+            let frameRate = 60;
+            let isPaused = false;
+            let isVisible = true;
+            let isPageVisible = !document.hidden;
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+            const render = () => renderer.render({ scene: mesh });
+            const stop = () => {
+              if (frameId !== 0) cancelAnimationFrame(frameId);
+              frameId = 0;
+            };
+            const canAnimate = () => isVisible && isPageVisible && !isPaused && !reducedMotion.matches;
+
+            const loop = now => {
+              frameId = 0;
+              if (!canAnimate()) return;
+
+              const delta = Math.min((now - previousTime) / 1000, 0.1);
+              previousTime = now;
+              elapsed += delta;
+
+              if (now - lastRenderTime >= 1000 / frameRate - 0.5) {
+                program.uniforms.uTime.value = elapsed;
+                render();
+                lastRenderTime = now;
+              }
+
+              frameId = requestAnimationFrame(loop);
+            };
+
+            const start = () => {
+              if (!canAnimate() || frameId !== 0) return;
+              previousTime = performance.now();
+              frameId = requestAnimationFrame(loop);
+            };
+
+            const setSize = () => {
+              const rect = container.getBoundingClientRect();
+              renderer.setSize(Math.max(1, Math.floor(rect.width)), Math.max(1, Math.floor(rect.height)));
+              program.uniforms.uResolution.value[0] = gl.drawingBufferWidth;
+              program.uniforms.uResolution.value[1] = gl.drawingBufferHeight;
+              render();
+            };
+
+            const handleVisibility = () => {
+              isPageVisible = !document.hidden;
+              if (canAnimate()) start();
+              else stop();
+            };
+            const handleReducedMotion = () => {
+              if (canAnimate()) start();
+              else {
+                stop();
+                render();
+              }
+            };
+
+            const resizeObserver = new ResizeObserver(setSize);
+            resizeObserver.observe(container);
+            const intersectionObserver = new IntersectionObserver(
+              ([entry]) => {
+                isVisible = entry.isIntersecting;
+                if (canAnimate()) start();
+                else stop();
+              },
+              { threshold: 0 }
+            );
+            intersectionObserver.observe(container);
+            document.addEventListener('visibilitychange', handleVisibility);
+            reducedMotion.addEventListener('change', handleReducedMotion);
+
+            contexts.set(container, {
+              renderer,
+              program,
+              mesh,
+              render,
+              setPaused(value) {
+                isPaused = value;
+                if (canAnimate()) start();
+                else {
+                  stop();
+                  render();
+                }
+              },
+              setFps(value) {
+                frameRate = Math.min(Math.max(value, 1), 120);
+              }
+            });
+
+            setSize();
+            start();
+
+            return () => {
+              stop();
+              resizeObserver.disconnect();
+              intersectionObserver.disconnect();
+              document.removeEventListener('visibilitychange', handleVisibility);
+              reducedMotion.removeEventListener('change', handleReducedMotion);
+              contexts.delete(container);
+              if (canvas.parentNode === container) container.removeChild(canvas);
+              gl.getExtension('WEBGL_lose_context')?.loseContext();
+            };
+          }, [dpr]);
+
+          useEffect(() => {
+            const container = containerRef.current;
+            if (!container) return;
+            const context = contexts.get(container);
+            if (!context) return;
+
+            const uniforms = context.program.uniforms;
+            setColor(uniforms.uLineColor, lineColor);
+            setColor(uniforms.uGlowColor, glowColor);
+            uniforms.uSpeed.value = speed;
+            uniforms.uScale.value = scale;
+            uniforms.uRotation.value = rotation;
+            uniforms.uRotationSpeed.value = rotationSpeed;
+            uniforms.uLayers.value = Math.min(Math.max(Math.round(layers), 1), 10);
+            uniforms.uWaveAmplitude.value = waveAmplitude;
+            uniforms.uWaveFrequency.value = waveFrequency;
+            uniforms.uWaveSpeed.value = waveSpeed;
+            uniforms.uLayerSpeed.value = layerSpeed;
+            uniforms.uTwist.value = twist;
+            uniforms.uTwistFrequency.value = twistFrequency;
+            uniforms.uTwistSpeed.value = twistSpeed;
+            uniforms.uLineFrequency.value = lineFrequency;
+            uniforms.uLineSpacing.value = lineSpacing;
+            uniforms.uLineSharpness.value = lineSharpness;
+            uniforms.uGlowFalloff.value = glowFalloff;
+            uniforms.uGlowIntensity.value = glowIntensity;
+            uniforms.uBrightness.value = brightness;
+            uniforms.uBlueBoost.value = blueBoost;
+            uniforms.uVignette.value = vignette;
+            uniforms.uGrain.value = grain;
+            uniforms.uLightMode.value = lightMode ? 1 : 0;
+            context.setFps(fps);
+            context.setPaused(paused);
+            context.render();
+          }, [
+            lineColor,
+            glowColor,
+            speed,
+            scale,
+            rotation,
+            rotationSpeed,
+            layers,
+            waveAmplitude,
+            waveFrequency,
+            waveSpeed,
+            layerSpeed,
+            twist,
+            twistFrequency,
+            twistSpeed,
+            lineFrequency,
+            lineSpacing,
+            lineSharpness,
+            glowFalloff,
+            glowIntensity,
+            brightness,
+            blueBoost,
+            vignette,
+            grain,
+            lightMode,
+            fps,
+            paused,
+            dpr
+          ]);
+
+          return <div ref={containerRef} className={`ghost-fibers-container ${className}`.trim()} />;
+        };
+
+        // Main App
+        const App = () => {
+          return (
+            <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+              <GhostFibers
+                lineColor="#140E35"
+                glowColor="#3437A0"
+                speed={0.2}
+                scale={2}
+                rotation={0}
+                rotationSpeed={0.25}
+                layers={4}
+                waveAmplitude={0.015}
+                waveFrequency={3}
+                waveSpeed={0.15}
+                layerSpeed={0.08}
+                twist={0.1}
+                twistFrequency={5}
+                twistSpeed={1.2}
+                lineFrequency={5}
+                lineSpacing={2}
+                lineSharpness={16}
+                glowFalloff={10}
+                glowIntensity={1.6}
+                brightness={2}
+                blueBoost={1.25}
+                vignette={0.8}
+                grain={0.05}
+                dpr={1}
+              />
+            </div>
+          );
+        };
+
+        // Render to DOM
+        const root = document.getElementById('ghost-fibers-container');
+        if (root) {
+          ReactDOM.createRoot(root).render(<App />);
+        }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
